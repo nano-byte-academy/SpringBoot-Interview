@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: RateLimiter_Token_Bucket
+
+server:
+  port: 9191
+
+resilience4j:
+  ratelimiter:
+    instances:
+      # default RateLimiter: Token Bucket
+      # The bucket will be re-filled with 2 token every 10 seconds
+      myRateLimiter1:
+        limit-for-period: 2        # the maximum number of calls that can be permitted within each refresh period
+        limit-refresh-period: 10s  # the interval after which the available token count is reset back to the limitForPeriod
+        timeout-duration: 0s      #the maximum time a caller will wait for a token; with 0 s it fails immediately if no token is available
+
